@@ -1,0 +1,24 @@
+kind = apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: staic-deployment
+  namespace: static
+spec:
+  selector:
+    matchLabels:
+      app: static
+  replica: 1 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: static
+    spec:
+      containers:
+      - name: static
+        image: 076592739138.dkr.ecr.ap-southeast-1.amazonaws.com/k8-static:number
+        resources:
+          limits:
+            memory: "128Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
